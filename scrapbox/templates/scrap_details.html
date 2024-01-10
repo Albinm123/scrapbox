@@ -1,0 +1,33 @@
+
+{%extends 'base_nav.html'%}
+{%block body_nav%}
+<div class="bhig">
+    <div class="container bg-dark ">
+        {%csrf_token%}
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{ data.scrap_pic.url }}" class="card-img-top" alt="no img">
+                        <div class="card-body">
+                        <h5 class="card-title">{{data.name}}</h5>
+                        <p class="card-text">
+                            <div>price: {{data.price}}</div>
+                            <div>category: {{data.category}}</div>
+                            <div>conditon: {{data.condition}}</div>
+                            <div>location: {{data.location}}</div>
+                            <div> user: {{data.user}}</div>
+                            <div>prodect added on: {{data.created_date}}</div>
+                            <div>status : {{data.status}}</div>
+       
+                        </p>
+                            <a href="{%url 'scrap_bid' data.id %}">bid</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

@@ -1,0 +1,162 @@
+
+ .bgcolor{
+  background-color: #dad8e6;
+  /* background-image: linear-gradient(0deg, #ea95ea 0%, #090a0a 100%); */
+  height: 100vh;
+ }   
+.bhig{
+  height: 100%;
+}
+                
+
+.bgimg {
+    height:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    min-width: 100vb;
+    background-image: url(../images/pexels-pixabay-327394.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+  }
+
+  .sec {
+    position:relative;
+    min-width: 40vh;
+    min-height: 55vh;
+    background-color:transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(45px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 3rem;
+  }
+  .sec1{
+    max-width: 65vh;
+    min-height: 75vh;
+    max-height: 95vh;
+    min-width: 30%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(199, 28, 156);
+    background-image: url(../images/bg123.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding:  0px;
+    background-size: cover;
+    color: white;
+
+
+    
+  }
+  .ali{
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+.hig{
+    min-height: 300px;
+  }
+  
+.but {
+    margin-top: 20px;
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    background-color: rgb(255, 255,255, 1);
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    font-weight: 600;
+  
+}
+.loginhead{
+  font-size: 2rem;
+  color: white;
+  text-align: center;
+}
+
+.inputbox {
+  position: relative;
+  background-color: transparent;
+  margin-top: 20px;
+  max-width: 150px;
+  outline: none;
+  border: 1px solid transparent;
+  border-bottom: 2px solid white;
+  color: white
+  
+}
+
+/* .icon1{
+    color: #fff;
+    font-size: 1.2rem;
+    top: 20px;
+} */
+.icon0{
+  color: #fff;
+  font-size: 1.4rem;
+  top: 20px;
+  /* margin-top: 13px; */
+  position: relative; 
+  top: 5px; 
+}
+
+.register {
+  font-size: 0.9rem;
+  color: white;
+  text-align: center;
+  margin: 25px 0 10px;
+}
+
+.atag{
+  color: white;
+  text-decoration:none ;
+
+}
+.atag:hover{
+  color: blue;
+  font-size: large;
+
+}
+
+.but:hover {
+  background-color: rgb(255, 255,255, 0.5);
+}
+
+.atag:hover{
+  text-decoration: underline;
+}
+.mal{
+  margin-left: 0px;
+}
+
+.ixv{
+  width: 80%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: aqua;
+}
+
+.gridv{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  
+}
+
+.imghig{
+  width: 100%;
+  height: 200px;
+
+}

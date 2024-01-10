@@ -1,0 +1,28 @@
+{%extends 'base.html' %}
+{%load static%} 
+{%block body%}
+<div class="bgimg"> 
+  <div class="sec ">
+    <form class="hig " action="" method="post">
+      {%csrf_token%}
+        <h1 class="loginhead">Login</h1>
+        <div class="mt-1">
+          <ion-icon class="icon0" name="person-circle-outline"></ion-icon> {{form.username}}
+        </div>
+        <div class=" ">
+          <ion-icon class="icon0" name="lock-closed"></ion-icon>
+            {{form.password}}
+        </div>
+        <div class="register">
+          <p>Don't have a account <a class="atag" href="{%url 'register' %}">Register <ion-icon class="icon0 " name="add-circle-outline"></ion-icon></a></p>
+        </div>
+        <div>
+          <button class="but">Log in</button>
+        </div>
+
+    </form>
+  </div>
+  
+</div>
+
+{%endblock%}

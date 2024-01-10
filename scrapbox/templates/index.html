@@ -1,0 +1,49 @@
+{%extends 'base_nav.html'%}
+
+{%load static%}
+{%block body_nav%}
+{%csrf_token%}
+<div class="container">
+    <div class="row ">
+        {%for scrap in data%}
+        <div class="col-4  mt-5 ml-5 ">
+            <div class="card" style="width: 18rem;">
+                {%if scrap.scrap_pic %}
+                <!-- <img src="{{ scrap.scrap_pic.url }}" class="card-img-top imghig" alt="no img"> -->
+                <a href="{%url 'scrap_details' scrap.id %}"><img src="{{ scrap.scrap_pic.url }}"
+                        class="card-img-top imghig" alt="no img"></a>
+                {%else%}
+                <img src="{%static 'scrapbox1/images/no-image-icon-23492.png' %}" alt="">
+                {%endif%}
+                <div class="card-body">
+                    <a href="{%url 'scrap_details' scrap.id %}">{{scrap.name}}</a>
+                    <p class="card-text">
+                    <div>price: {{scrap.price}}</div>
+                    <!-- <div>category: {{scrap.category}}</div> -->
+                    <div>conditon: {{scrap.condition}}</div>
+                    <div>location: {{scrap.location}}</div>
+                    <!-- <div> user: {{scrap.user}}</div> -->
+
+                    </p>
+                    <form action="{%url 'whishlist' scrap.id %}" method="post" class="d-flex">
+                        {%csrf_token%}
+                        {%if request.user in scrap.scrap_whish.user%}
+                        <button class="btn" name="action" type="submit" value="remove_whishlist">
+                            <i class="fa-regular fa-heart" style="color: #f60909;"></i>
+                        </button>
+                        
+                        {%else%}
+                        <button class="btn" name="action" type="submit" value="add_to_whishlist">
+                            <i class="fa-regular fa-heart" style="color: #400040;"></i>
+                        </button>
+                        {%endif%}
+                    </form>
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+</div>
+
+
+{%endblock%}

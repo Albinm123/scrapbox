@@ -1,0 +1,14 @@
+{%extends 'base_nav.html'%}
+{%block body_nav%}
+<div class="container bhig ">
+    <form action="" method="post">
+        {%csrf_token%}
+        {{form.as_p}}
+        <button class="but" type="submit">add</button>
+        
+    </form>
+
+</div>
+
+
+{%endblock%}

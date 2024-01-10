@@ -1,0 +1,252 @@
+{%extends 'base_nav.html'%}
+{%load static%}
+{%block body_nav%}
+<section class="bg-secondary">
+    <div class="container bg-white">
+        <div class="row align-items-center flex-row-reverse bg-primary">
+            <div class="col-lg-6 bg-dark text-white  mt-0">
+                <div class="row m-0 p-0">
+                    <div class="">
+                        <h2>{{data.user}}</h2>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="">
+                            <label>Birthday</label>
+                            <p>{{data.dob}}</p>
+                        </div>
+                        <div class="">
+                            <label>Phone</label>
+                            <p>{{ data.phone }}</p>
+                        </div>
+                        <div class="">
+                            <label>Address</label>
+                            <p>{{data.address}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="">
+                            <label>Bio</label>
+                            <p>{{data.bio}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col bg-secondary text-white ">
+                <div>
+                    {%if data.profile_pic %}
+                    <!-- <p>{{ data.phone }}</p> -->
+                    <img src="{{data.profile_pic.url}}" title="" alt="no img" class="w-100 rounded-cricle">
+                    {%endif%}
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <div class="row"></div>
+
+        <!-- <p>{{data.user}}</p>
+        <p>{{data.dob}}</p>
+        <p>{{ data.phone }}</p>
+        <p>{{data.address}}</p>
+        <p>{{data.bio}}</p>  -->
+
+
+        <a href="{%url 'profile-update' request.user.profile.id %}">update profile</a>
+
+    </div>
+</section>
+
+<!-- <section class="bg-dark text-white">
+    <div class="container bg-primary">
+        {%if data.user == request.user%}
+            {%for s in scrap_data %}
+                <h2>{{ s.name }}</h2>
+                <p>{{ s.price }}</p>
+            {%endfor%}
+
+        {%endif%}
+
+    </div>
+</section>
+
+ -->
+<!-- <section class="bg-dark text-white">
+    <div class="container bg-primary">
+        {% if data.user == request.user %}
+            <div class="row">
+                {% for s in scrap_data %}
+                    <div class="col-md-6">
+                        <div class="card text-dark bg-light mb-3">
+                            <div class="card-header">
+                                <h5 class="card-title">{{ s.name }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{ s.price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</section> -->
+
+
+<div class="container">
+    <div class="row ">
+        {%for scrap in scrap_data%}
+        <div class="col-4  mt-5 ml-5 ">
+            <div class="card" style="width: 18rem;">
+                {%if scrap.scrap_pic %}
+                <!-- <img src="{{ scrap.scrap_pic.url }}" class="card-img-top imghig" alt="no img"> -->
+                <a href="{%url 'scrap_details' scrap.id %}"><img src="{{ scrap.scrap_pic.url }}"
+                        class="card-img-top imghig" alt="no img"></a>
+                {%else%}
+                <img src="{%static 'scrapbox1/images/no-image-icon-23492.png' %}" alt="">
+                {%endif%}
+                <div class="card-body">
+                    <a href="{%url 'scrap_details' scrap.id %}">{{scrap.name}}</a>
+                    <p class="card-text">
+                    <div>price: {{scrap.price}}</div>
+                    <div>category: {{scrap.category}}</div>
+                    <!-- <div>conditon: {{scrap.condition}}</div> -->
+                    <!-- <div>location: {{scrap.location}}</div> -->
+                    <!-- <div> user: {{scrap.user}}</div> -->
+
+                    </p>                        
+                    <h4>bids</h4>
+
+                    {% for bid in bid_data %}
+                        {% if bid.scrap == scrap %}
+                            <p></p>
+                            <p>{{bid.user}} : {{ bid.amount }} - {{ bid.status }}</p>
+                            <form action="{%url 'bid' bid.id %}" method="post">
+                                {%csrf_token%}
+                                <button type="submit" name="action" value="accept">acept</button>
+                                <!-- <button type="submit" name="action" value="decline">decline</button> -->
+
+
+                            </form>        
+                        {% endif %}
+
+                    {% endfor %}
+                    <!-- <a class="btn" href="{%url 'scrap_details' scrap.id %}">view more</a> -->
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+</div>
+
+
+<br>
+<br>
+<!-- {% if data.user == request.user %}
+Display UserProfile data
+    <h3>Your Scraps:</h3>
+        {% for s in scrap_data %}
+            <p>{{ s.name }} - {{ s.price }}</p>
+            <h4>Bids for {{ s.name }}:</h4>
+            {% for bid in bid_objects %}
+                {% if bid.scrap == s %}
+                    <p>{{ bid.amount }} - {{ bid.status }}</p>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+{% endif %} -->
+
+{%endblock%}
+
+
+<!-- 
+
+<section class="section about-section gray-bg" id="about">
+    <div class="container bg-primary">
+        <div class="row align-items-center flex-row-reverse">
+            <div class="col-lg-6 bg-dark text-white" > 
+                <div class="about-text go-to">
+                    <h3 class="dark-color">{{data}}</h3>
+                    {%if data.user == request.user %}
+                        <a class="text-decoration-none btn" href="{%url 'profile-update' data.id %}">Edit profile</a>
+                    {%endif%}
+                    <div class="row about-list">
+                        <div class="col-md-6">
+                            <div class="media">
+                                <label>Birthday</label>
+                                <p>{{data.dob}}</p>
+                            </div>
+                            <div class="media">
+                                <label>Phone</label>
+                                <p>{{ data.phone }}</p>
+                            </div>
+                            <div class="media">
+                                <label>Address</label>
+                                <p>{{data.address}}</p>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="media">
+                                <label>Bio</label>
+                                <p>{{data.bio}}</p>
+                            </div>
+                            {%if request.user != data.user %}
+                            <div class="media">
+                                <form action="{%url 'block' data.id %}" method="post">
+                                    {%csrf_token%}
+                                    {%if data in request.user.profile.block.all %}
+                                    <button type="submit" name="action" value="block">block</button>
+                                    {%else%}
+                                    <button type="submit" name="action" value="block">block</button>
+                                    {%endif%}
+                                </form>
+                            </div>
+                            {%endif%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="about-avatar">
+                    {%if data.profile_pic %}
+                    <img src="{{data.profile_pic.url}}" title="" alt="no img">
+                    {%else%}
+
+
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+        <div class="counter">
+            <div class="row">
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6 class="count h2" data-to="500" data-speed="500">{{data.following.count}}</h6>
+                        <p class="m-0px font-w-600">Following</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6 class="count h2" data-to="150" data-speed="150">{{data.followed_by.count}}</h6>
+                        <p class="m-0px font-w-600">Follower</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6 class="count h2" data-to="850" data-speed="850">{{data.blocked.count}}</h6>
+                        <p class="m-0px font-w-600">{{data.blocked.all.count}} Blocked</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6 class="count h2" data-to="190" data-speed="190">{{data.user.userpost.all.count}}</h6>
+                        <p class="m-0px font-w-600">Posts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+ -->
