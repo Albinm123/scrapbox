@@ -68,9 +68,20 @@ class Reviews(models.Model):
     )
     rating=models.CharField(max_length=200,choices=options,default="5")
     
-   
+# class Order(models.Model):
+#     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name="user_order")
+#     scrap=models.ForeignKey(Scrap,on_delete=models.CASCADE,related_name="scrap_order")
+    
+    
 def create_profile(sender,created,instance,**kwargs):
      if created:
         UserProfile.objects.create(user=instance)
         print("profile obj creadted")
 post_save.connect(create_profile,sender=User)
+
+def create_whishlist(sender,created,instance,**kwargs):
+     if created:
+        WishList.objects.create(user=instance)
+        print("whish obj creadted")
+post_save.connect(create_whishlist,sender=User)
+

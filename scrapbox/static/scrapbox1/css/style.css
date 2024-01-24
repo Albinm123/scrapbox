@@ -1,85 +1,88 @@
-
- .bgcolor{
+.bgcolor {
   background-color: #dad8e6;
   /* background-image: linear-gradient(0deg, #ea95ea 0%, #090a0a 100%); */
   height: 100vh;
- }   
-.bhig{
+}
+
+.bhig {
   height: 100%;
 }
-                
 
+/* login page */
 .bgimg {
-    height:100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    min-width: 100vb;
-    background-image: url(../images/pexels-pixabay-327394.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;
-  }
-
-  .sec {
-    position:relative;
-    min-width: 40vh;
-    min-height: 55vh;
-    background-color:transparent;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    border-radius: 20px;
-    backdrop-filter: blur(45px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem 3rem;
-  }
-  .sec1{
-    max-width: 65vh;
-    min-height: 75vh;
-    max-height: 95vh;
-    min-width: 30%;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(199, 28, 156);
-    background-image: url(../images/bg123.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    padding:  0px;
-    background-size: cover;
-    color: white;
-
-
-    
-  }
-  .ali{
-    display: flex;
-    align-items: center;
-    min-height: 100vh;
-  }
-
-.hig{
-    min-height: 300px;
-  }
-  
-.but {
-    margin-top: 20px;
-    width: 100%;
-    height: 40px;
-    border-radius: 40px;
-    background-color: rgb(255, 255,255, 1);
-    border: none;
-    outline: none;
-    font-size: 1rem;
-    font-weight: 600;
-  
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-width: 100vb;
+  background-image: url(../images/pexels-pixabay-327394.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
 }
-.loginhead{
+
+.sec {
+  position: relative;
+  min-width: 40vh;
+  min-height: 55vh;
+  background-color: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  backdrop-filter: blur(45px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 3rem;
+}
+
+.sec1 {
+  max-width: 65vh;
+  min-height: 75vh;
+  max-height: 95vh;
+  min-width: 30%;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(199, 28, 156);
+  background-image: url(../images/bg123.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding: 0px;
+  background-size: cover;
+  color: white;
+
+
+
+}
+
+.ali {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.hig {
+  min-height: 300px;
+}
+
+.but {
+  margin-top: 20px;
+  width: 100%;
+  height: 40px;
+  border-radius: 40px;
+  background-color: rgb(255, 255, 255, 1);
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 600;
+
+}
+
+.loginhead {
   font-size: 2rem;
   color: white;
   text-align: center;
@@ -94,7 +97,6 @@
   border: 1px solid transparent;
   border-bottom: 2px solid white;
   color: white
-  
 }
 
 /* .icon1{
@@ -102,13 +104,13 @@
     font-size: 1.2rem;
     top: 20px;
 } */
-.icon0{
+.icon0 {
   color: #fff;
   font-size: 1.4rem;
   top: 20px;
   /* margin-top: 13px; */
-  position: relative; 
-  top: 5px; 
+  position: relative;
+  top: 5px;
 }
 
 .register {
@@ -118,29 +120,31 @@
   margin: 25px 0 10px;
 }
 
-.atag{
+.atag {
   color: white;
-  text-decoration:none ;
+  text-decoration: none;
 
 }
-.atag:hover{
+
+.atag:hover {
   color: blue;
   font-size: large;
 
 }
 
 .but:hover {
-  background-color: rgb(255, 255,255, 0.5);
+  background-color: rgb(255, 255, 255, 0.5);
 }
 
-.atag:hover{
+.atag:hover {
   text-decoration: underline;
 }
-.mal{
+
+.mal {
   margin-left: 0px;
 }
 
-.ixv{
+.ixv {
   width: 80%;
   height: 100%;
   display: flex;
@@ -148,15 +152,235 @@
   background-color: aqua;
 }
 
-.gridv{
-  display:grid;
+.gridv {
+  display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  
+
 }
 
-.imghig{
+.imghig {
   width: 100%;
   height: 200px;
 
+}
+
+/* Styles for demonstration purposes */
+.comment-toggle {
+  display: none;
+}
+
+.comment-section {
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
+
+.comment-container {
+  margin-top: 10px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.comment-toggle:checked+.comment-section .comment-container {
+  max-height: 200px;
+  /* Adjust the max height as needed */
+  transition: max-height 0.3s ease-in;
+}
+
+.comment {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* comment decoration ends */
+/* index */
+.x {
+  position: relative;
+  width: 320px;
+  height: 400px;
+  background: #f8f0f0;
+  color: #463e3e;
+  border-radius: 20px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.in_h2 {
+  color: black;
+  text-transform: capitalize;
+  text-decoration: none;
+}
+
+.card {
+  position: relative;
+}
+
+.wishlist-buttons {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+/* end index */
+/* p detail */
+.con {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  grid-template-rows: auto auto;
+  justify-content: center;
+  align-items: start;
+  gap: 0px 0px;
+  grid-template-areas:
+    "a c"
+    "d bx";
+}
+
+/* .container-d-bx {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 110px; Adjust the gap as needed
+} */
+.a {
+  grid-area: a;
+  margin: 20px;
+}
+
+.c {
+  grid-area: c;
+  margin: 20px;
+}
+
+.d {
+  grid-area: d;
+
+}
+.bx {
+  grid-area: bx;
+  padding: 30px;
+}
+
+.imghig1 {
+  height: 400px;
+  border-radius: 20px;
+}
+
+.wishlist-buttons {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  top: 10px;
+  /* adjust the top value as needed */
+  right: 10px;
+  /* adjust the right value as needed */
+  display: flex;
+  gap: 10px;
+  /* adjust the gap between buttons as needed */
+}
+
+.wishlist-buttons1 {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  padding: 0;
+  top: 0;
+  right: 0;
+  padding: 10px;
+}
+
+.image-container {
+  position: relative;
+}
+
+/* nav */
+.profile-small {
+  width: 60px;
+  /* height: 30px; */
+  border-radius: 50%;
+  background-color: rgb(68, 68, 68);
+}
+
+.m {
+  /* margin-left: 0px; */
+  margin-right: 5rem;
+  padding-left: 30px;
+  list-style-type: none;
+  size: 40px;
+  background-color: rgb(246, 246, 243);
+
+}
+
+.dd {
+  position: absolute;
+  top: 100%;
+  right: 0;
+}
+
+/* profile */
+.main_text {
+  font-size: 50px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: rgb(107, 18, 166);
+  text-decoration: solid;
+  text-transform: capitalize;
+}
+
+.sub_text {
+  color: rgb(107, 18, 166);
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.sub_text_my {
+  color: rgb(80, 76, 77);
+  font-size: 35px;
+  font-weight: 600;
+  text-decoration: solid;
+  text-transform: capitalize;
+}
+
+.bg_gray {
+  background-color: rgb(217, 219, 226);
+}
+
+/* add scrap */
+
+.dflex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  box-shadow: 5px 5px 20px rgba(226, 21, 52, 0.434);
+
+}
+
+.but1 {
+  margin-top: 20px;
+  width: 50%;
+  height: 40px;
+  border-radius: 40px;
+  background-color: rgb(166, 156, 156);
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.list1{
+  list-style-type: none;
 }

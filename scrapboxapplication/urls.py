@@ -32,7 +32,11 @@ urlpatterns = [
     path('profile/<int:pk>/change',views.ProfileUpdateView.as_view(),name="profile-update"),
     path('profile/<int:pk>',views.ProfileListView.as_view(),name="profile_details"),
     path('scrap/<int:pk>/acept',views.BidAceptView.as_view(),name="bid"),
-    path('scrap/<int:pk>/whishlist',views.WhishLlstView.as_view(),name="whishlist")
+    path('scrap/<int:pk>/whishlist',views.WhishLlstView.as_view(),name="whishlist"),
+    path('scrap/<int:pk>/whishlist/list',views.WishlistDisplayView.as_view(),name="whishlist_list"),
+    path('scrap/<int:pk>/review/add',views.ReviewCreateView.as_view(),name="add_review"),
+    path('user_bids/', views.UserBidsView.as_view(), name='user_bids'),
+    # path('scrap/<int:pk>/add-review/',views.ReviewCreateView.as_view(), name='add_review'),
 
 
 

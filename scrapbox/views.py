@@ -2,9 +2,9 @@ from typing import Any
 from django.db.models.query import QuerySet
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
-from django.shortcuts import render,redirect
-from scrapbox.models import Scrap,Bids,UserProfile,WishList
-from scrapbox.forms import UserForm,SignInForm,ScrapCreateForm,BidCreateForm,UserProfileForm
+from django.shortcuts import render,redirect,get_object_or_404
+from scrapbox.models import Scrap,Bids,UserProfile,WishList,Reviews
+from scrapbox.forms import UserForm,SignInForm,ScrapCreateForm,BidCreateForm,UserProfileForm,ReviewForm
 from django.views.generic import View,CreateView,FormView,DetailView,ListView,UpdateView
 from django.contrib.auth import authenticate,login,logout
 from django.urls import reverse
@@ -56,8 +56,9 @@ class SignoutView(View):
 class IndexView(View):
     def get(self,request,*args,**kwargs):
         qs=Scrap.objects.all().exclude(user=request.user)
-        print(qs)
-        return render(request,"index.html",{"data":qs})
+        wish=WishList.objects.get(user=request.user)
+        # print(qs)
+        return render(request,"index.html",{"data":qs,"wish":wish})
     
     # def post(self,request,*args,**kwargs):
     #     return render(request,"index.html")
@@ -87,10 +88,29 @@ class ScrapCreateView(CreateView):
     #         # print("faild")
     #         return render(request,"scrapcreate.html",{"form":form})
 
-class ScrapListView(DetailView):
-        template_name="scrap_details.html"
-        model=Scrap
-        context_object_name="data"
+class ScrapListView(DetailView,CreateView):
+    template_name="scrap_details.html"
+    model=Scrap
+    form_class=ReviewForm
+    context_object_name="data"
+    
+    def get_context_data(self,**kwargs):
+        context =super().get_context_data(**kwargs)
+        id=self.kwargs.get("pk")
+        print(".....",id)
+        scrap_obj=Scrap.objects.get(id=id)
+        context["reviews"]=Reviews.objects.filter(scrap=scrap_obj)
+        context["wish"]=WishList.objects.get(user=self.request.user)
+
+        return context
+    
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     id = self.kwargs.get("pk")
+    #     scrap_obj = Scrap.objects.get(id=id)
+    #     context["reviews"] = Reviews.objects.filter(scrap=scrap_obj)
+    #     context["form"] = ReviewForm()
+    #     return context
 
 class ScrapDeleteView(View):
     def get(self,request,*args,**kwargs):
@@ -111,7 +131,9 @@ class ScrapBidView(View):
 
     def get(self,request,*args,**kwargs):
         form=BidCreateForm()
-        return render(request,"bids.html",{"form":form})
+        id=kwargs.get("pk")
+        qs=Scrap.objects.get(id=id)
+        return render(request,"bids.html",{"form":form,"data":qs})
     
     def post(self,request,*args,**kwargs):
         form=BidCreateForm(request.POST)
@@ -127,7 +149,7 @@ class ScrapBidView(View):
 class ProfileListView(DetailView):
     template_name="profile.html"
     model=UserProfile
-    context_object_name="data"    
+    context_object_name="data"   
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -175,26 +197,136 @@ class BidAceptView(View):
         return redirect("index")
     
 class WhishLlstView(View):
-    def post(self,request,*args,**kwargs):
-        id=kwargs.get("pk")
-        scrap_obj=Scrap.objects.get(id=id)
-        user=request.user
-        action=request.POST.get("action")
 
-         # wishlist, created = WishList.objects.get_or_create(user=user)
-        #  wishlist = WishList.objects.filter(scrap=scrap_obj)
-        wishlist = WishList.objects.filter(user=user, scrap=scrap_obj).first()
-        if wishlist is None:
-            if action=="add_to_whishlist":
-                # wishlist.user=(user)
+        def post(self,request,*args,**kwargs):
+            id=kwargs.get("pk")
+            scrap_obj=Scrap.objects.get(id=id)
+            user=request.user
+            action=request.POST.get("action")
+
+            # wishlist=WishList.objects.get_or_create(user=user)
+            wishlist_exists = WishList.objects.filter(user=user).exists()
+            if not wishlist_exists:
                 wishlist = WishList.objects.create(user=user)
-                wishlist.scrap.add(scrap_obj)
-            elif action=="remove_whishlist":
+            else:
+                wishlist = WishList.objects.get(user=user)
+            
+            if action == "remove_whishlist":
                 wishlist.scrap.remove(scrap_obj)
-            
-        return redirect("index")
-            
-            
+            elif action == "add_to_whishlist":
+                wishlist.scrap.add(scrap_obj)
+            return redirect("index")
         
+        # def post(self,request,*args,**kwargs):
+    #     id=kwargs.get("pk")
+    #     scrap_obj=Scrap.objects.get(id=id)
+    #     user=request.user
+    #     action=request.POST.get("action")
+
+    #     # wishlist, created = WishList.objects.get_or_create(user=user)
+    #     # wishlist = WishList.objects.filter(scrap=scrap_obj)
+    #     wishlist = WishList.objects.get_or_create(user=user, scrap=scrap_obj)
+    #     if wishlist is None:
+    #         if action=="remove_whishlist":
+    #             wishlist.scrap.remove(scrap_obj)
+    #         elif action=="add_to_whishlist":
+    #             wishlist.user=(user)
+    #             wishlist = WishList.objects.create(user=user)
+    #             WishList.objects.add(scrap_obj)
+           
+            
+    #     return redirect("index")
+    
+    # def post(self,request,*args,**kwargs):
+    #     id=kwargs.get("pk")
+    #     scrap_obj=Scrap.objects.get(id=id)
+    #     action=request.POST.get("action")
+    #     wishlist = WishList.objects.get_or_create(user=request.user)
+    #     if action == "add":
+    #         wishlist.scrap.add(scrap_obj)
+    #     elif action == "remove":
+    #         wishlist.scrap.remove(scrap_obj)
+    #     return redirect("index")
     
     
+class WishlistDisplayView(View):
+    def get(self,request,*args,**kwargs):
+        qs=WishList.objects.filter(user=request.user)
+        wish=WishList.objects.get(user=request.user)
+        return render(request,"whishlist.html",{"data":qs,"wish":wish})
+    
+    
+class ReviewCreateView(CreateView):
+    # template_name="scrap_details.html"
+    form_class=ReviewForm
+    model=Reviews
+    
+    def get_success_url(self):
+        # return reverse("add_review")
+        return reverse("scrap_details", kwargs={"pk": self.kwargs["pk"]})
+
+    def form_valid(self, form):
+        form.instance.user=self.request.user
+        id=self.kwargs.get("pk")
+        # print(id)
+        scrap_obj=Scrap.objects.get(id=id)
+        form.instance.scrap=scrap_obj
+        return super().form_valid(form)
+    
+    # def get_context_data(self,**kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     id=self.kwargs.get("pk")
+    #     print(".....",id)
+    #     scrap_obj=Scrap.objects.get(id=id)
+    #     context["reviews"]=Reviews.objects.all()
+    #     return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     id = self.kwargs.get("pk")
+    #     scrap_obj = Scrap.objects.get(id=id)
+    #     # context['scrap'] = scrap_obj
+    #     context['reviews'] = Reviews.objects.filter(scrap=scrap_obj)
+    #     return context
+    
+    # def get_queryset(self):
+    #     id=self.kwargs.get("pk")
+    #     qs=Scrap.objects.get(id=id)
+    #     return qs
+
+    # def get(self,request,*args,**kwargs):
+    #     form=ReviewForm()
+    #     return render(request,"rev.html",{"form":form})
+    
+    # def post(self,request,*args,**kwargs):
+    #     id=kwargs.get("pk")
+    #     scrap_obj=Scrap.objects.get(id=id)
+    #     user=request.user
+    #     scrap=scrap_obj
+
+# class ReviewCreateView(CreateView):
+    #     model = Reviews
+    #     form_class = ReviewForm
+
+    #     def form_valid(self, form):
+    #         form.instance.user = self.request.user
+    #         id = self.kwargs.get("pk")
+    #         scrap_obj = Scrap.objects.get(id=id)
+    #         form.instance.scrap = scrap_obj
+    #         return super().form_valid(form)
+
+    #     def get_success_url(self):
+    #         id = self.kwargs.get("pk")
+    #         return reverse("scrap_details", kwargs={"pk": id})
+    
+class UserBidsView(View):
+    template_name = 'user_bids.html'
+
+    def get(self, request, *args, **kwargs):
+        # Retrieve the user's bids
+        user_bids = Bids.objects.filter(user=request.user)
+        
+        context = {
+            'user_bids': user_bids,
+        }
+
+        return render(request, self.template_name, context)

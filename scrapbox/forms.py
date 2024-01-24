@@ -2,7 +2,7 @@ from typing import Any
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from scrapbox.models import Scrap,Bids,UserProfile
+from scrapbox.models import Scrap,Bids,UserProfile,Reviews
 
 class UserForm(UserCreationForm):
     class Meta:
@@ -67,4 +67,9 @@ class UserProfileForm(forms.ModelForm):
             "dob":forms.DateInput(attrs={"class":"form-control","type":"date"})
         }
 
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model=Reviews
+        fields=["comment","rating"]
         

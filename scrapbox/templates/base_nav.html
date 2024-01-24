@@ -1,10 +1,11 @@
 {%extends 'base.html'%}
 {%block body%}
+{%load static%}
 {%csrf_token%}
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="{%url 'index' %}">ScrapBox</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -13,29 +14,30 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{%url 'scrap_create' %}">add</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{%url 'profile_details' request.user.profile.id %}">profile</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li>
         </ul>
         <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
-          <a class="btn btn-outline-secondary text-primary" href="{%url 'signout' %}">logout {{request.user}}</a>
         </form>
+        <li class="nav-item dropdown m">
+          <a class="nav-link dropdown-toggle dd" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {%if request.user.profile.profile_pic%}
+              <a href="{%url 'profile_details' request.user.profile.id %}"><img class="profile-small" src="{{request.user.profile.profile_pic.url}}" alt="Avatar"></a>
+            {%else%}
+              <img class="profile-small" src="{%static 'scrapbox1/images/no-image-icon-23492.png' %}" alt="Avatar">
+            {%endif%}
+          </a>
+
+          <ul class="dropdown-menu  ">
+            <li><a class="dropdown-item" href="{%url 'profile_details' request.user.profile.id %}">profile</a></li>
+            <a class="dropdown-item" href="{%url 'scrap_create' %}">Add Scrap</a>
+            <a class="dropdown-item" href="{%url 'user_bids' %}">My Bids</a>
+            <li><a class="dropdown-item" href="{%url 'whishlist_list' request.user.id %}">whishlist</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="btn btn-outline-secondary text-primary" href="{%url 'signout' %}">logout {{request.user}}</a></li>
+
+          </ul>
+        </li>
       </div>
     </div>
 </nav>

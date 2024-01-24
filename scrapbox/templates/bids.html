@@ -1,12 +1,34 @@
 {%extends 'base_nav.html'%}
 {%block body_nav%}
-<div class="container bhig ">
-    <form action="" method="post">
-        {%csrf_token%}
-        {{form.as_p}}
-        <button class="but" type="submit">add</button>
+
+<div class="h-100">
+    <div class="con">
+        <div class="a image-container">
+            <img src="{{ data.scrap_pic.url }}" class="card-img-top imghig1" alt="no img">
+        </div>
+        <div class="c">
+            <h2 class="card-title in_h2 ">{{data.name}}</h2>
+            <p class="card-text">
+            <div>price: {{data.price}}</div>
+            <div>category: {{data.category}}</div>
+            <div>conditon: {{data.condition}}</div>
+            <div>location: {{data.location}}</div>
+            <div> user: {{data.user}}</div>
+            <div>prodect added on: {{data.created_date}}</div>
+            <div>status : {{data.status}}</div>
+            <br><br><br>
+            <form action="" method="post">
+                {%csrf_token%}
+                {{form.as_p}}
+                <button class="btn btn-outline-primary" type="submit">Bid</button>
         
-    </form>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container bhig ">
+
 
 </div>
 

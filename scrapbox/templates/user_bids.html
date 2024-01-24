@@ -1,0 +1,51 @@
+{%extends 'base_nav.html'%}
+{%load static%}
+{%block body_nav%}
+
+<h1>My Bids</h1>
+
+
+<div class="container">
+    <div class="row ">
+        {%for bid in user_bids%}
+        <div class="col-3  m-4 shadow ">
+            <div class="card pd">
+                {%if bid.scrap.scrap_pic %}
+                <!-- <img src="{{ scrap.scrap_pic.url }}" class="card-img-top imghig" alt="no img"> -->
+                <a href="{%url 'scrap_details' bid.scrap.id %}"><img src="{{ bid.scrap.scrap_pic.url }}"
+                        class="card-img-top imghig" alt="no img"></a>
+                {%else%}
+                <img src="{%static 'scrapbox1/images/no-image-icon-23492.png' %}" alt="">
+                {%endif%}
+                <div class="card-body">
+                    <a class="in_h2" href="{%url 'scrap_details' bid.scrap.id %}">{{bid.scrap.name}}</a>
+                    <p class="card-text">
+                    <div>price: {{bid.scrap.price}}</div>
+                    <div>category: {{bid.scrap.category}}</div>
+                    <!-- <div>conditon: {{scrap.condition}}</div> -->
+                    <!-- <div>location: {{scrap.location}}</div> -->
+                    <!-- <div> user: {{scrap.user}}</div> -->
+
+                    </p>
+                    <h4>bids</h4>
+
+                    {% if user_bids %}
+                    <ul>
+                        {% for bid in user_bids %}
+                        <li class="list1">
+                            Scrap: {{ bid.scrap.name }} <br>
+                            Amount: {{ bid.amount }} <br>
+                            Status: {{ bid.status }} <br>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No bids found for this user.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+</div>
+{%endblock%}

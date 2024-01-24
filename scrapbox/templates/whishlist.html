@@ -1,0 +1,140 @@
+{%extends 'base_nav.html'%}
+{%load static%}
+{%block body_nav%}
+
+
+    <!-- <div class="container">
+        <div class="row ">
+        {%for wwhishlist in data%}
+            {%for scrap in wwhishlist.scrap.all%}
+                <div class="col-4  mt-5 ml-5 ">
+                    <div class="card" style="width: 18rem;">
+                        {%if scrap.scrap_pic %}
+                        <img src="{{ scrap.scrap_pic.url }}" class="card-img-top imghig" alt="no img">
+                        <a href="{%url 'scrap_details' scrap.id %}"><img src="{{ scrap.scrap_pic.url }}"
+                                class="card-img-top imghig" alt="no img"></a>
+                        {%else%}
+                        <img src="{%static 'scrapbox1/images/no-image-icon-23492.png' %}" alt="">
+                        {%endif%}
+                        <div class="card-body">
+                            <a href="{%url 'scrap_details' scrap.id %}">{{scrap.name}}</a>
+                            <p class="card-text">
+                            <div>price: {{scrap.price}}</div>
+                            <div>category: {{scrap.category}}</div>
+                            <div>conditon: {{scrap.condition}}</div>
+                            <div>location: {{scrap.location}}</div>
+                            <div> user: {{scrap.user}}</div>
+        
+                            </p>
+                            <form action="{%url 'whishlist' scrap.id %}" method="post" class="d-flex">
+                                {%csrf_token%}
+                                {%if request.user in scrap.scrap_whish %}
+                                    <button class="btn" name="action" type="submit" value="remove_whishlist">
+                                        <i class="fa-regular fa-heart" style="color: #f61c1c;"></i>
+                                    </button>
+                                {%else%}
+                                    <button class="btn" name="action" type="submit" value="add_to_whishlist">
+                                        <i class="fa-regular fa-heart" style="color: #2d1fb0;"></i>
+                                    </button>
+                                {%endif%}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+            {%endfor%}
+        </div>
+    </div> -->
+
+    <div class="container">
+        <div>
+            {%for w in data%}
+               <h1 class="sub_text_my" >my whishlist</h1>
+            {%endfor%}
+        </div>      
+
+        <div class="row ">
+            {%for whishlist in data%}
+                {%for scrap in whishlist.scrap.all %}
+                <div class="col-4  mt-5 ml-5 ">
+                    <div class="card x" style="width: 18rem;">
+                        {%if scrap.scrap_pic %}
+                        <a href="{%url 'scrap_details' scrap.id %}"><img src="{{ scrap.scrap_pic.url }}"
+                                class="card-img-top imghig" alt="no img"></a>
+                        {%else%}
+                        <img src="{%static 'scrapbox1/images/no-image-icon-23492.png' %}" alt="">
+                        {%endif%}
+                        <div class="card-body">
+                            <a class="in_h2" href="{%url 'scrap_details' scrap.id %}">{{scrap.name}}</a>
+                            <p class="card-text">
+                            <div>price: {{scrap.price}}</div>
+                            <div>conditon: {{scrap.condition}}</div>
+                            <div>location: {{scrap.location}}</div>
+                            <a  class="btn btn-outline-primary" href="#">Buy Now</a>
+
+        
+                            </p>
+                            <form action="{%url 'whishlist' scrap.id %}" method="post" class="d-flex wishlist-buttons">
+                                {%csrf_token%}
+                                {%if scrap in wish.scrap.all %}
+                                    <button class="btn" name="action" type="submit" value="remove_whishlist">
+                                        <i class="fa-regular fa-heart" style="color: #f61c1c;"></i>
+                                    </button>
+                                {%else%}
+                                    <button class="btn" name="action" type="submit" value="add_to_whishlist">
+                                        <i class="fa-regular fa-heart" style="color: #2d1fb0;"></i>
+                                    </button>
+                                {%endif%}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+            {%endfor%}
+        </div>
+    </div>
+    
+    
+
+
+     <!-- <div class="container ">
+        <div class="row ">
+            {%for scrap in data %}
+            <div class="col-4  mt-5 ml-5 ">
+                <div class="card x" style="width: 18rem; ">
+                    <div class="">
+                        {%if scrap.scrap_pic %}
+                    <a href="{%url 'scrap_details' scrap.id %}"><img src="{{ scrap.scrap_pic.url }}"
+                            class="card-img-top imghig" alt="no img"></a>
+                    {%else%}
+                    <img src="{%static 'scrapbox1/images/no-image-icon-23492.png' %}" alt="">
+                    {%endif%}
+                    </div>
+                    <div class=" ">
+                        <h2 class=""><a class="in_h2" href="{%url 'scrap_details' scrap.id %}">{{scrap.name}}</a></h2>
+                        <p class="card-text ">
+                        <div>price: {{scrap.price}}</div>
+                        <div>conditon: {{scrap.condition}}</div>
+                        <div>location: {{scrap.location}}</div>
+                        <a  class="btn btn-outline-primary" href="#">Buy Now</a>
+    
+                        </p>
+                        <form action="{%url 'whishlist' scrap.id %}" method="post" class="d-flex wishlist-buttons" >
+                            {%csrf_token%}
+                            {%if scrap in wish.scrap.all %}
+                                <button class="btn" name="action" type="submit" value="remove_whishlist">
+                                    <i class="fa-solid fa-heart" style="color: #f61c1c;"></i>
+                                </button>
+                            {%else%}
+                                <button class="btn" name="action" type="submit" value="add_to_whishlist">
+                                    <i class="fa-regular fa-heart" style="color: #2d1fb0;"></i>
+                                </button>
+                            {%endif%}
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div> -->
+{%endblock%}

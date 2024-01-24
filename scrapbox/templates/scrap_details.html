@@ -1,17 +1,18 @@
-
 {%extends 'base_nav.html'%}
+{%load static%}
 {%block body_nav%}
-<div class="bhig">
-    <div class="container bg-dark ">
+<!-- <div class="bhig">
+
+    <div class="container bg-secondary ">
         {%csrf_token%}
         <div class="container">
             <div class="row">
                 <div class="col">
                     <div class="card" style="width: 18rem;">
-                        <img src="{{ data.scrap_pic.url }}" class="card-img-top" alt="no img">
+                        <img src="{{ data.scrap_pic.url }}" class="card-img-top imghig" alt="no img">
                         <div class="card-body">
-                        <h5 class="card-title">{{data.name}}</h5>
-                        <p class="card-text">
+                            <h5 class="card-title">{{data.name}}</h5>
+                            <p class="card-text">
                             <div>price: {{data.price}}</div>
                             <div>category: {{data.category}}</div>
                             <div>conditon: {{data.condition}}</div>
@@ -19,15 +20,128 @@
                             <div> user: {{data.user}}</div>
                             <div>prodect added on: {{data.created_date}}</div>
                             <div>status : {{data.status}}</div>
-       
-                        </p>
-                            <a href="{%url 'scrap_bid' data.id %}">bid</a>
 
+
+                            </p>
+                            <form action="{%url 'add_review' data.id %}" method="post">
+                                {% if form.errors %}
+                                <div class="alert alert-danger">
+                                    <strong>Error(s):</strong>
+                                    <ul>
+                                        {% for error in form.errors %}
+                                        <li>{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                {% endif %}
+                                {%csrf_token%}
+
+                                <p>
+                                    {{form.as_p}}
+                                </p>
+                                <br><br>
+                                <button type="submit" class="btn btn-secondary rounded-start-0">Add Review</button>
                         </div>
+
+                        </form>
+
+                        <div>
+                            <input type="checkbox" id="comment-toggle" class="comment-toggle">
+                            <div class="comment-section">
+
+                                <label for="comment-toggle">Show Reviews</label>
+                                <div class="comment-container">
+                                    Comments will be displayed here
+                                    {%for review in reviews%}
+                                    <div class="comment">{{review.comment}}</div>
+                                    <div class="comment">{{review.rating}}</div>
+                                    <div class="comment">Nice content!</div>
+                                    {%endfor%}
+
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div> -->
+
+<div class="h-100">
+    <div class="con">
+        <div class="a image-container">
+            <img src="{{ data.scrap_pic.url }}" class="card-img-top imghig1" alt="no img">
+            <form action="{%url 'whishlist' data.id %}" method="post" class=" wishlist-buttons1" >
+                {%csrf_token%}
+                
+                {%if data in wish.scrap.all %}
+                    <button class="btn" name="action" type="submit" value="remove_whishlist">
+                        <i class="fa-solid fa-heart" style="color: #f61c1c; font-size:30px;"></i>
+                        <!-- <ion-icon name="heart" style="color: #f61c1c;"></ion-icon> -->
+                    </button>
+                {%else%}
+                    <button class="btn" name="action" type="submit" value="add_to_whishlist">
+                        <i class="fa-regular fa-heart" style="color: #2d1fb0;"></i>
+                    </button>
+                {%endif%}
+            </form>
+        </div>
+        <div class="c">
+            <h2 class="card-title in_h2 ">{{data.name}}</h2>
+            <p class="card-text">
+            <div>price: {{data.price}}</div>
+            <div>category: {{data.category}}</div>
+            <div>conditon: {{data.condition}}</div>
+            <div>location: {{data.location}}</div>
+            <div> user: {{data.user}}</div>
+            <div>prodect added on: {{data.created_date}}</div>
+            <div>status : {{data.status}}</div>
+                <br><br><br>
+                <a  class="btn btn-outline-primary" href="{%url} 'scrap_bid' data.id %">Buy Now</a>
+                <!-- <a href="{%url 'scrap_bid' data.id %}">bid</a> -->
+
+        </div>
+
+        <div class="d">
+            <form action="{%url 'add_review' data.id %}" method="post">
+                {% if form.errors %}
+                <div class="alert alert-danger">
+                    <strong>Error(s):</strong>
+                    <ul>
+                        {% for error in form.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                {%csrf_token%}
+    
+                <p>
+                    {{form.as_p}}
+                </p>
+                <br><br>
+                <button type="submit" class="btn btn-secondary rounded-start-0">Add Review</button>
+            </form>
+        </div>  
+        <div class="bx">
+                <input type="checkbox" id="comment-toggle" class="comment-toggle">
+                <div class="comment-section">
+    
+                    <label for="comment-toggle">Show Reviews</label>
+                    <div class="comment-container">
+                        Comments will be displayed here
+                        {%for review in reviews%}
+                        <div class="comment">{{review.comment}}</div>
+                        <div class="comment">{{review.rating}}</div>
+                        <div class="comment">Nice content!</div>
+                        {%endfor%}
+                    </div>
+                </div>
+        </div>
+       
+
 </div>
 {%endblock%}

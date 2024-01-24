@@ -3,39 +3,39 @@
 {%load static%}
 {%block body_nav%}
 {%csrf_token%}
-<div class="container">
+<div class="container ">
     <div class="row ">
-        {%for scrap in data%}
+        {%for scrap in data %}
         <div class="col-4  mt-5 ml-5 ">
-            <div class="card" style="width: 18rem;">
-                {%if scrap.scrap_pic %}
-                <!-- <img src="{{ scrap.scrap_pic.url }}" class="card-img-top imghig" alt="no img"> -->
+            <div class="card x" style="width: 18rem; ">
+                <div class="">
+                    {%if scrap.scrap_pic %}
                 <a href="{%url 'scrap_details' scrap.id %}"><img src="{{ scrap.scrap_pic.url }}"
                         class="card-img-top imghig" alt="no img"></a>
                 {%else%}
                 <img src="{%static 'scrapbox1/images/no-image-icon-23492.png' %}" alt="">
                 {%endif%}
-                <div class="card-body">
-                    <a href="{%url 'scrap_details' scrap.id %}">{{scrap.name}}</a>
-                    <p class="card-text">
+                </div>
+                <div class=" ">
+                    <h2 class=""><a class="in_h2" href="{%url 'scrap_details' scrap.id %}">{{scrap.name}}</a></h2>
+                    <p class="card-text ">
                     <div>price: {{scrap.price}}</div>
-                    <!-- <div>category: {{scrap.category}}</div> -->
                     <div>conditon: {{scrap.condition}}</div>
                     <div>location: {{scrap.location}}</div>
-                    <!-- <div> user: {{scrap.user}}</div> -->
+                    <a  class="btn btn-outline-primary" href="{%url 'scrap_bid' scrap.id %}">Buy Now</a>
 
                     </p>
-                    <form action="{%url 'whishlist' scrap.id %}" method="post" class="d-flex">
+                    <form action="{%url 'whishlist' scrap.id %}" method="post" class="d-flex wishlist-buttons" >
                         {%csrf_token%}
-                        {%if request.user in scrap.scrap_whish.user%}
-                        <button class="btn" name="action" type="submit" value="remove_whishlist">
-                            <i class="fa-regular fa-heart" style="color: #f60909;"></i>
-                        </button>
-                        
+                        {%if scrap in wish.scrap.all %}
+                            <button class="btn" name="action" type="submit" value="remove_whishlist">
+                                <i class="fa-solid fa-heart" style="color: #f61c1c;"></i>
+                                <!-- <ion-icon name="heart" style="color: #f61c1c;"></ion-icon> -->
+                            </button>
                         {%else%}
-                        <button class="btn" name="action" type="submit" value="add_to_whishlist">
-                            <i class="fa-regular fa-heart" style="color: #400040;"></i>
-                        </button>
+                            <button class="btn" name="action" type="submit" value="add_to_whishlist">
+                                <i class="fa-regular fa-heart" style="color: #2d1fb0;"></i>
+                            </button>
                         {%endif%}
                     </form>
                 </div>
@@ -44,6 +44,41 @@
         {%endfor%}
     </div>
 </div>
+
+<!-- {%for scrap in data %}
+    <div class="container bo ">
+        <div class="card">
+            <div class="imgBx">
+                {%if scrap.scrap_pic %}
+                <a href="{%url 'scrap_details' scrap.id %}"><img src="{{ scrap.scrap_pic.url }}"
+                        class="card-img-top imghig" alt="no img"></a>
+                {%else%}
+                <img src="{%static 'scrapbox1/images/no-image-icon-23492.png' %}" alt="">
+                {%endif%}            
+            </div>
+
+
+                    <div class="contentBx">
+
+                        <h2><a href="{%url 'scrap_details' scrap.id %}">{{scrap.name}}</a></h2>
+
+                        <div class="">
+                            <h3>Size :</h3>
+                            <span>7</span>
+                            <span>8</span>
+                            <span>9</span>
+                            <span>10</span>
+                            <div>price: {{scrap.price}}</div>
+                            <div>conditon: {{scrap.condition}}</div>
+                            <div>location: {{scrap.location}}</div>
+                        </div>
+
+                        <a href="#">Buy Now</a>
+                    </div>
+
+                </div>
+            </div>
+{%endfor%} -->
 
 
 {%endblock%}

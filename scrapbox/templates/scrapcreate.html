@@ -1,16 +1,20 @@
 {%extends 'base.html'%}
 {%block body%}
-<div class="container bg-white">
-    <form action="" method="post" enctype="multipart/form-data" class="">
-        {%csrf_token%}
-        <p>
-            {{form.as_p}}
-        </p>
 
-    <button class="but" type="submit">add</button>
-</form>
+<div class="dflex h-100">
+    <div class="p-5 bg-white dflex   ">
+        <form action="" method="post" enctype="multipart/form-data" class="">
+            {%csrf_token%}
+            <p>
+                {{form.as_p}}
+            </p>
+
+            <button class="but1 " type="submit">Add</button>
+        </form>
+
+
+    </div>
 
 
 </div>
-
 {%endblock%}
